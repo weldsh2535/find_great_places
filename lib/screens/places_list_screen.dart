@@ -5,19 +5,19 @@ import './add_places_screen.dart';
 import '../providers/great_places.dart';
 
 class PlacesListScreen extends StatelessWidget {
-  const PlacesListScreen({Key? key}) : super(key: key);
+  const PlacesListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Places'),
+        title: const Text('Your Places'),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.of(context).pushNamed(AddPlaceScreen.routName);
             },
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
           )
         ],
       ),
@@ -26,11 +26,11 @@ class PlacesListScreen extends StatelessWidget {
             Provider.of<GreatPlaces>(context, listen: false).fetchandSetDb(),
         builder: (ctx, state) =>
             state.connectionState == ConnectionState.waiting
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : Consumer<GreatPlaces>(
-                    child: Center(
+                    child: const Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +56,7 @@ class PlacesListScreen extends StatelessWidget {
                       ),
                     ),
                     builder: (context, gP, ch) {
-                      final bool isEmpty = gP.places.length <= 0;
+                      final bool isEmpty = gP.places.isEmpty;
                       if (isEmpty) {
                         return ch!;
                       }
@@ -78,7 +78,7 @@ class PlacesListScreen extends StatelessWidget {
                                       title: Text(gP.places[i].title),
                                       onTap: () {},
                                     ),
-                                    Divider(),
+                                    const Divider(),
                                   ],
                                 ),
                               );

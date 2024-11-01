@@ -9,7 +9,7 @@ import '../widgets/locaton_input.dart';
 
 class AddPlaceScreen extends StatefulWidget {
   static const routName = '/add-place';
-  const AddPlaceScreen({Key? key}) : super(key: key);
+  const AddPlaceScreen({super.key});
 
   @override
   _AddPlaceScreenState createState() => _AddPlaceScreenState();
@@ -54,11 +54,11 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add a new place'),
+        title: const Text('Add a new place'),
         actions: [
           IconButton(
             onPressed: savePlace,
-            icon: Icon(Icons.done),
+            icon: const Icon(Icons.done),
           ),
         ],
       ),
@@ -69,14 +69,14 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
           Expanded(
               child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
                   Form(
                     key: _form,
                     child: TextFormField(
                       controller: _titleController,
-                      decoration: InputDecoration(labelText: 'Title'),
+                      decoration: const InputDecoration(labelText: 'Title'),
                       validator: (value) {
                         if (value == null) {
                           return 'Please enter a title';
@@ -85,12 +85,12 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       },
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ImagePreview(saveImage),
-                  SizedBox(height: 4,),
-                  LocationInput(),
+                  const SizedBox(height: 4,),
+                  const LocationInput(),
                 ],
               ),
             ),

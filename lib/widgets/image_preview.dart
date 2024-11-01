@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart' as sysPath;
 class ImagePreview extends StatefulWidget {
    Function saveImage;
 
-   ImagePreview(this.saveImage);
+   ImagePreview(this.saveImage, {super.key});
 
   @override
   _ImagePreviewState createState() => _ImagePreviewState();
@@ -18,25 +18,25 @@ class _ImagePreviewState extends State<ImagePreview> {
   File? imageFile;
 
   Future<void> _imagePicker() async {
-    final _picker = ImagePicker();
-    final _imageFile = await _picker.getImage(
+    final picker = ImagePicker();
+    final imageFile = await picker.getImage(
       source: ImageSource.camera,
       maxWidth: 600,
     );
-    if (_imageFile==null){
+    if (imageFile==null){
       return;
     }
     
-   final _imagePath=File(_imageFile.path);
+   final imagePath=File(imageFile.path);
 
     setState(() {
-      imageFile=_imagePath;
+      imageFile=imagePath;
     });
 
-    final _appDir=await sysPath.getApplicationDocumentsDirectory();
+    final appDir=await sysPath.getApplicationDocumentsDirectory();
     
-    final _imageName=path.basename(_imageFile.path);
-    final savedImage= await _imagePath.copy('${_appDir.path}/$_imageName');
+    final imageName=path.basename(imageFile.path);
+    final savedImage= await imagePath.copy('${appDir.path}/$imageName');
     print(savedImage);
    widget.saveImage(savedImage);
 
@@ -53,7 +53,7 @@ class _ImagePreviewState extends State<ImagePreview> {
             border: Border.all(width: 1, color: Colors.lightGreen),
           ),
           child: imageFile == null
-              ? Center(
+              ? const Center(
                   child: Text(
                     'Chose a Image',
                     textAlign: TextAlign.center,
@@ -64,7 +64,7 @@ class _ImagePreviewState extends State<ImagePreview> {
                   fit: BoxFit.cover,
                 ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         // Expanded(
